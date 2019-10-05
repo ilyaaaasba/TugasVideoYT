@@ -7,7 +7,10 @@
     public $judul,
             $penulis,
             $penerbit;
-            $harga;
+
+    protected $diskon =0;
+            
+    private $harga;
             
            
 
@@ -22,6 +25,12 @@
         
 
     }
+
+   
+    public function getHarga() {
+        return $this->harga - ($this->harga * $this->diskon / 100);
+    }
+
     public function getLabel() {
         return "$this->penulis, $this->penerbit";
     }
@@ -60,6 +69,12 @@
             $this->waktuMain = $waktuMain;
 
         }
+        public function setDiskon($diskon) {
+            $this->diskon = $diskon;
+    
+        }
+
+       
         public function getInfoProduk() {
             $str = "Game : " . parent :: getInfoProduk() . " ~ {$this->waktuMain} Jam.";
             return $str;
@@ -84,6 +99,9 @@ $produk2 = new Game("Uncharted", "Neil", "Sony", 250000, 50);
 echo $produk1->getInfoProduk();
 echo "<br>";
 echo $produk2->getInfoProduk();
+echo "<hr>";
+
+echo $produk2->getHarga();
 
 
  
